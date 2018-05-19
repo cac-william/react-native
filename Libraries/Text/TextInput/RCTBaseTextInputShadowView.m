@@ -23,6 +23,10 @@
   NSAttributedString *_Nullable _localAttributedText;
   CGSize _previousContentSize;
 
+  // START unmerged PR
+  NSString *_text;
+  // END
+  
   NSTextStorage *_textStorage;
   NSTextContainer *_textContainer;
   NSLayoutManager *_layoutManager;
@@ -100,6 +104,19 @@
     @"target": self.reactTag,
   });
 }
+
+// START PR https://github.com/facebook/react-native/pull/18456
+- (NSString *)text
+{
+  return _text;
+}
+
+- (void)setText:(NSString *)text
+{
+  _text = text;
+  _previousAttributedText = _localAttributedText;
+}
+//END
 
 #pragma mark - RCTUIManagerObserver
 
